@@ -1,0 +1,23 @@
+name: Python Pipeline
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+      - name: Test script hello.py
+        run: python hello.py
+  build:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+      - name: Create Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: hello
+          path: .
